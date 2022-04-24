@@ -1,0 +1,45 @@
+.feedback {
+    overflow: hidden;
+    &__item {
+        display: flex;
+        margin-top: 60px;
+        animation-name: feedback-animation;
+        animation-duration: 2s;
+    }
+    &__img {
+        width: 169px;
+        height: 100%;
+        margin-right: 60px;
+    }
+    &__name {
+        font-weight: 700;
+        font-size: 18px;
+        color: #0D0D0D;
+        line-height: 18px;
+        margin-bottom: 0;
+    }
+    &__exp {
+        font-size: 14px;
+        color: #646464;
+        line-height: 22px;
+    }
+    &__text {
+        margin-top: 10px;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 24px;
+        color: #0D0D0D;
+    }
+
+}
+
+@keyframes feedback-animation {
+    0% {
+        transform: translateY(500px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

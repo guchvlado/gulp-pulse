@@ -9,9 +9,30 @@
     margin: 0 auto;
 }
 
+.title {
+    color: #0D0D0D;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 30px;
+    &_left {
+        color: #fff;
+        font-size: 36px;
+        line-height: 54px;
+        text-align: left;
+    }
+}
+
 @import "blocks/buttons";
+@import "blocks/forms";
+
 @import "blocks/header";
 @import "blocks/promo";
 @import "blocks/advantages";
+@import "blocks/consultation";
+@import "blocks/slider";
+@import "blocks/catalog";
+@import "blocks/feedback";
+@import "blocks/footer";
 
 @import "media";
