@@ -47,5 +47,92 @@ function tabItems(catalogItemLinkClass) {
         });
     });
 }
+
+//-----------------modal start
+function openModal(modalSelector) {
+    const modal = document.querySelector(modalSelector);
+    const overlay = document.querySelector('.overlay');
+    overlay.style.display = "block";
+    modal.style.display = "block";
+}
+function closeModal(modalSelector) {
+    const modal = document.querySelector(modalSelector);
+    const overlay = document.querySelector('.overlay');
+    overlay.style.display = "none";
+    modal.style.display = "none";
+}
+
+
+function modal(modalSelector, buttonSelector) {
+    const modal = document.querySelector(modalSelector);
+    const overlay = document.querySelector('.overlay');
+    const buttons = document.querySelectorAll(buttonSelector);
+    
+    if (buttons) {
+        buttons.forEach((button, index) => {
+            button.addEventListener("click", () => {
+                openModal(modalSelector);
+                
+                if (modal.getAttribute('id') == "order") {
+                    const text = button.parentElement.parentElement.querySelector('.catalog-item__subtitle').textContent;
+                    //const text = document.querySelectorAll(".catalog-item__subtitle")[index].textContent;
+                    modal.querySelector('.modal__descr').textContent = text;
+                }
+            });
+        });
+    }
+    
+    overlay.addEventListener('click', (e) => {
+        const target = e.target;
+        if (target.classList.contains('overlay') || target.classList.contains('modal__close')) {
+            closeModal(modalSelector);
+        }
+    });
+}
+//----------modal end
+
+// ajax start
+
+function sendFormData(formSelector) {
+    const forms = document.querySelectorAll(formSelector);
+
+    forms.forEach(form => {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const data = new FormData(form);
+            // let result = "";
+            // const object = Object.fromEntries(data.entries());
+            // for (atr in object) {
+            //     result += `${atr}=${object[atr]}&`;
+            // }
+            // result = result.substring(0, result.length - 1);
+            // console.log(result)
+            //const dataSerlized = JSON.stringify(Object.fromEntries(data.entries())) // const json = JSON.stringify(Object.fromEntries(formData.entries()));
+
+            fetch('server/server.php', {
+                method: "POST",
+                body: data
+            }).then(() => {
+                console.log("Данные отправлены");
+                form.reset();
+                closeModal('#consultation');
+                openModal('#thanks');
+
+            }).catch(err => {
+                console.log(err);
+            })
+        })
+    });
+}
+
+// ajax end
+
+
 tabItems("catalog-item__link");
 tabs("catalog__tab", "catalog__content");
+modal('#consultation', '[data-modal="consultation"]');
+modal('#order', '.button_catalog');
+modal('#thanks');
+
+sendFormData('.feed-form');

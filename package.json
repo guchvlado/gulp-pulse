@@ -19,6 +19,7 @@
     "sass": "^1.50.0"
   },
   "dependencies": {
+    "nodemailer": "^6.7.3",
     "swiper": "^8.1.1"
   }
 }
