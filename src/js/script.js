@@ -128,6 +128,19 @@ function sendFormData(formSelector) {
 
 // ajax end
 
+// pageUp script start
+function pageUp(pageUpSelector) {
+    const pageUp = document.querySelector(pageUpSelector);
+    window.addEventListener('scroll', () => {
+        if (window.scrollY >= window.innerHeight) {
+            pageUp.style.right = "40px";
+        }
+        else {
+            pageUp.style.right = "-100px";
+        }
+    });
+}
+// pageUp script end
 
 tabItems("catalog-item__link");
 tabs("catalog__tab", "catalog__content");
@@ -136,3 +149,5 @@ modal('#order', '.button_catalog');
 modal('#thanks');
 
 sendFormData('.feed-form');
+
+pageUp('.pageup');
